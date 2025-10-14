@@ -1,34 +1,30 @@
+## 📁 Project Structure
+
+This project is organized as a monorepo containing distinct Backend (Django) and Frontend (React/JavaScript) applications.
+
+```text
 project-dir/
 │
-├── backend/
-│   ├── manage.py
-│   ├── requirements.txt
-│   ├── db.sqlite3
-│   │
-│   ├── Django-proj/           ← main project folder
-│   │   ├── __init__.py
-│   │   ├── settings.py
-│   │   ├── urls.py
-│   │   ├── wsgi.py
-│   │   └── asgi.py
-│   │
-│   ├── api/                       ← app for APIs
-│   │   ├── __init__.py
-│   │   ├── models.py
-│   │   ├── views.py
-│   │   ├── urls.py
-│   │   ├── serializers.py
-│   │   └── admin.py
+├── backend/                                         # Django Backend Application
+│   ├── manage.py                                 # Django's command-line utility
+│   ├── requirements.txt                         # Python dependency list
+│   ├── db.sqlite3                               # Default database file
+│   │
+│   ├── Django-proj/                             # Main project configuration
+│   │   ├── settings.py                         # Project settings
+│   │   └── urls.py                             # Root URL configurations
+│   │
+│   └── api/                                      # Django app for API functionality
+│       ├── models.py                           # Database schemas
+│       ├── views.py                            # Business logic/API endpoints
+│       └── serializers.py                    # Data formatting (Django REST Framework)
 │
-├── frontend/
-│   ├── src/
-│   │   ├── components/
-│   │   ├── pages/
-│   │   ├── api/
-│   │   ├── App.jsx
-│   │   └── index.js
-│   │
-│   ├── public/
-│   └── package.json
+├── frontend/                                      # React/JavaScript Frontend Application
+│   ├── src/                                      # Source code
+│   │   ├── components/                        # Reusable UI elements
+│   │   ├── pages/                               # Route-specific components
+│   │   └── App.jsx                             # Main application component
+│   │
+│   └── package.json                             # Node.js dependency and script file
 │
 └── README.md
