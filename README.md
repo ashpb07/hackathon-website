@@ -36,3 +36,23 @@ project-dir/
     "checkins": "http://127.0.0.1:8000/elderly/api/checkins/",
     "reminders": "http://127.0.0.1:8000/elderly/api/reminders/"
 }
+
+
+
+
+
+POST /medication/api/price-comparison/compare_prices/
+{
+  "medication_id": "123e4567-e89b-12d3-a456-426614174000",
+  "user_lat": 40.7128,
+  "user_lng": -74.0060,
+  "radius": 5,
+  "quantity": 30
+}
+
+GET /medication/api/medications/search_medications/?q=metformin
+
+POST /medication/api/price-comparison/find_generic_alternatives/
+{
+  "medication_id": "123e4567-e89b-12d3-a456-426614174000"
+}
