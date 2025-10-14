@@ -28,3 +28,11 @@ project-dir/
 │   └── package.json                             # Node.js dependency and script file
 │
 └── README.md
+
+
+
+{
+    "elderly": "http://127.0.0.1:8000/elderly/api/elderly/",
+    "checkins": "http://127.0.0.1:8000/elderly/api/checkins/",
+    "reminders": "http://127.0.0.1:8000/elderly/api/reminders/"
+}
