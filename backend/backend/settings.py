@@ -26,6 +26,16 @@ SECRET_KEY = 'django-insecure-(3^t+!h^#anhh_a!)b^^v7o@s@t1g^uw$q*6k%(f8dx96)nbr8
 DEBUG = True
 
 ALLOWED_HOSTS = []
+# chatbot_project/settings.py
+
+import os
+from dotenv import load_dotenv
+
+# Load .env from project root
+load_dotenv()
+
+OPENAI_API_KEY = os.getenv("OPENAI_API_KEY")
+
 
 
 # Application definition
@@ -38,6 +48,8 @@ INSTALLED_APPS = [
     'django.contrib.messages',
     'django.contrib.staticfiles',
     'membership',
+    'chat_api',
+    'rest_framework'
 ]
 
 MIDDLEWARE = [
