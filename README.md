@@ -73,27 +73,27 @@ hackathon-website/
 │
 ├── backend/ # Django backend
 │ ├── manage.py
-│ ├── db.sqlite3 / PostgreSQL
-│ ├── requirements.txt
-│ ├── backend/ # project settings
-│ │ ├── settings.py
-│ │ ├── urls.py
-│ │ └── wsgi.py
-│ └── api/ # example Django app
-│ ├── models.py
-│ ├── views.py
-│ ├── serializers.py
-│ └── urls.py
+│ ├── db.sqlite3 / PostgreSQL # Development or production database
+│ ├── requirements.txt # Backend dependencies
+│ │
+│ ├── backend/ # Django project settings
+│ │ ├── settings.py # Main Django configuration
+│ │ ├── urls.py # Root URL routing
+│ │ └── wsgi.py # WSGI entry point for deployment
+│ │
+│ └── api/ # Django app (core logic)
+│ ├── models.py # Database models
+│ ├── views.py # API and view logic
+│ ├── serializers.py # DRF serializers
+│ └── urls.py # App-specific routing
 │
-├── frontend/ # HTML, CSS, JS frontend
-│ ├── index.html
-│ ├── style.css
-│ └── script.js
+├── frontend/ # Frontend (HTML, CSS, JS)
+│ ├── index.html # Main UI page
+│ ├── style.css # Styling
+│ └── script.js # Interactivity / API integration
 │
-├── assets/
-│ └── architecture.png # architecture diagram
+├── assets/ # Static assets and diagrams
+│ └── architecture.png # Architecture diagram (used in README)
 │
-├── .gitignore
-└── README.md
-
-
+├── .gitignore # Git ignore file
+└── README.md # Project documentation
