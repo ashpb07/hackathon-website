@@ -1,0 +1,41 @@
+flowchart TD
+    subgraph A["CLIENT (BROWSER)"]
+        A1[HTML<br/>Structure]
+        A2[CSS<br/>Style]
+        A3[JavaScript<br/>Interactivity]
+        A1 & A2 & A3 --> A4[HTTP/HTTPS Requests]
+    end
+
+    subgraph B["WEB SERVER"]
+        B1[DJANGO<br/>Python Web Framework]
+        
+        subgraph B2["API LAYER"]
+            B3[DJANGO REST FRAMEWORK<br/>API]
+            B4[JSON Data]
+        end
+        
+        B5[Django Templates/Views]
+        
+        B1 --> B2
+        B1 --> B5
+        B3 --> B4
+    end
+
+    subgraph C["DATABASE"]
+        C1[(POSTGRESQL<br/>DATABASE)]
+    end
+
+    A4 --> B1
+    B3 --> B6[Retrieve Data]
+    B1 --> B7[Read/Write Data]
+    
+    B6 --> C1
+    B7 --> C1
+    
+    B2 -.->|Internal API<br/>Communication| B5
+    B4 -.->|Data Flow| B5
+
+    style A fill:#e1f5fe,stroke:#0288d1,stroke-width:2px
+    style B fill:#f3e5f5,stroke:#7b1fa2,stroke-width:2px
+    style C fill:#e8f5e9,stroke:#2e7d32,stroke-width:2px
+    style B2 fill:#fff3e0,stroke:#ef6c00,stroke-width:2px
