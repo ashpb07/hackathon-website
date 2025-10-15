@@ -152,3 +152,14 @@ python manage.py runserver
 | Pranjal  | Frontend Developer | [Email](mailto:pranjalshetty18@gmail.com) / [GitHub](https://github.com/PranjalShetty)         |
 | Anish    | Backend Developer  | [Email](mailto:anishprabhu783@gmail.com) / [GitHub](https://github.com/ashpb07)                |
 | Hithansh | Designer           | [Email](mailto:hithansharekere@gmail.com) / [GitHub](https://github.com/hithansharekere-debug) |
+
+
+
+## 👥 Contributors / Team
+
+| Name     | Role               | Contact                                                                                        |
+| -------- | ----------------- | ---------------------------------------------------------------------------------------------- |
+| Shreya   | Frontend Developer | [Email](mailto:shreyashridhar19@gmail.com) / [GitHub](https://github.com/shreyashridhara)      |
+| Pranjal  | Frontend Developer | [Email](mailto:pranjalshetty18@gmail.com) / [GitHub](https://github.com/PranjalShetty)         |
+| Anish    | Backend Developer  | [Email](mailto:anishprabhu783@gmail.com) / [GitHub](https://github.com/ashpb07)                |
+| Hithansh | Designer           | [Email](mailto:hithansharekere@gmail.com) / [GitHub](https://github.com/hithansharekere-debug) |
