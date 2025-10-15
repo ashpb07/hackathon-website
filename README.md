@@ -69,31 +69,30 @@ Below is the high-level architecture of this project:
 
 ## 🗂️ Project Structure
 
+```text
 hackathon-website/
-│
-├── backend/ # Django backend
-│ ├── manage.py
-│ ├── db.sqlite3 / PostgreSQL
-│ ├── requirements.txt
-│ ├── backend/ # project settings
-│ │ ├── settings.py
-│ │ ├── urls.py
-│ │ └── wsgi.py
-│ └── api/ # example Django app
-│ ├── models.py
-│ ├── views.py
-│ ├── serializers.py
-│ └── urls.py
-│
-├── frontend/ # HTML, CSS, JS frontend
-│ ├── index.html
-│ ├── style.css
-│ └── script.js
-│
-├── assets/
-│ └── architecture.png # architecture diagram
-│
+├── backend/                                # Main Django Backend Root
+│   ├── backend/                            # Project Settings Directory
+│   │   ├── settings.py                     # Main configuration (DB, INSTALLED_APPS, CHANNELS)
+│   │   ├── urls.py                         # Root URL router (HTTP)
+│   │   ├── routing.py                      # Root ROUTING router (WebSocket/ASGI)
+│   │   └── wsgi.py / asgi.py               # Server interface files
+│   ├── api/                                # Example Django API Application
+│   │   ├── models.py                       # Database schemas
+│   │   ├── views.py                        # HTTP endpoint logic (DRF Views)
+│   │   ├── serializers.py                  # DRF data serialization
+│   │   ├── urls.py                         # App-specific HTTP URLs
+│   │   └── consumers.py                    # WebSocket handling logic
+│   ├── manage.py                           # Django command-line utility
+│   └── requirements.txt                    # Python dependencies (Django, DRF, Channels, Redis)
+├── frontend/                               # Static Frontend Files
+│   ├── index.html                          # Main application structure
+│   ├── style.css                           # Styling and presentation
+│   └── script.js                           # Client-side logic and API/WebSocket calls
+├── assets/                                 # Static assets (images, fonts, etc.)
+├── architecture.png                        # System architecture diagram
 ├── .gitignore
 └── README.md
+
 
 
