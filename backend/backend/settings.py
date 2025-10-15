@@ -26,6 +26,16 @@ SECRET_KEY = 'django-insecure-(3^t+!h^#anhh_a!)b^^v7o@s@t1g^uw$q*6k%(f8dx96)nbr8
 DEBUG = True
 
 ALLOWED_HOSTS = []
+# chatbot_project/settings.py
+
+import os
+from dotenv import load_dotenv
+
+# Load .env from project root
+load_dotenv()
+
+OPENAI_API_KEY = os.getenv("OPENAI_API_KEY")
+
 
 
 # Application definition
@@ -38,7 +48,23 @@ INSTALLED_APPS = [
     'django.contrib.messages',
     'django.contrib.staticfiles',
     'membership',
+    'chat_api',
+    'rest_framework',
+    'elderly_checkin',
+    'medication',
+    'breathing',
+    
+
 ]
+# settings.py
+REST_FRAMEWORK = {
+    'DEFAULT_PERMISSION_CLASSES': [
+        'rest_framework.permissions.AllowAny',  # This allows anyone to access the API
+    ],
+    'DEFAULT_AUTHENTICATION_CLASSES': [
+        'rest_framework.authentication.SessionAuthentication',  # This handles CSRF
+    ]
+}
 
 MIDDLEWARE = [
     'django.middleware.security.SecurityMiddleware',
@@ -55,7 +81,10 @@ ROOT_URLCONF = 'backend.urls'
 TEMPLATES = [
     {
         'BACKEND': 'django.template.backends.django.DjangoTemplates',
-        'DIRS': [],
+           'DIRS': [
+            BASE_DIR / 'templates',  # Add this line
+            # BASE_DIR / 'your_app' / 'templates',  # You can add more paths
+        ],
         'APP_DIRS': True,
         'OPTIONS': {
             'context_processors': [
@@ -119,8 +148,12 @@ USE_TZ = True
 # Static files (CSS, JavaScript, Images)
 # https://docs.djangoproject.com/en/5.2/howto/static-files/
 
+
 STATIC_URL = 'static/'
 
+STATICFILES_DIRS = [
+    BASE_DIR / 'static',  # Your static files directory
+]
 # Default primary key field type
 # https://docs.djangoproject.com/en/5.2/ref/settings/#default-auto-field
 
