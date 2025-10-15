@@ -13,6 +13,13 @@ It combines a RESTful backend API with a dynamic HTML/CSS/JS frontend.
 - [Features](#features)
 - [Project Structure](#project-structure)
 - [Contact](#contact)
+- [Getting Started](#getting-started)
+  - [Prerequisites](#prerequisites)
+  - [Installation](#installation)
+  - [Running Locally](#running-locally)
+- [Contributing](#contributing)
+- [License](#license)
+- [Contact](#contact)
 
 ---
 
@@ -54,6 +61,10 @@ Below is the high-level architecture of this project:
 | **Runtime / Language** | **Python 3.x**, **JavaScript (ES6)** | Primary languages for backend and frontend. |
 
 
+Chatting system |
+Client → Daphne (ASGI) → Django Channels → Redis → Multiple Consumers
+
+
 ---
 
 ## ✨ Features
@@ -63,7 +74,10 @@ Below is the high-level architecture of this project:
 -  **Secure Patient Portal** — Simple login system with personal health records.  
 -  **Real-Time Updates** — Patient status and alerts for caregivers.  
 -  **Modular Design** — Django + DRF + PostgreSQL for scalability.  
--  **Analytics Ready** — Extendable for data visualization and predictive insights.  
+-  **Analytics Ready** — Extendable for data visualization and predictive insights.
+- **Shared Experiences** - Learn from others facing similar challenges
+-**Group Channels**: Multiple themed discussion rooms
+
 
 ---
 
@@ -96,3 +110,45 @@ hackathon-website/
 
 
 
+---
+
+## ⚙️ Getting Started
+
+### Prerequisites
+- Python 3.8+
+- pip
+- PostgreSQL
+- Node.js (optional for frontend tools)
+- Git
+
+### Installation
+
+```bash
+git clone https://github.com/ashpb07/hackathon-website.git
+cd hackathon-website
+
+
+cd backend
+python -m venv venv
+source venv/bin/activate        # macOS/Linux
+# venv\Scripts\activate         # Windows
+pip install -r requirements.txt
+python manage.py migrate
+
+
+cd ../frontend
+# Modify index.html, style.css, or script.js as needed
+
+
+cd backend
+python manage.py runserver
+
+
+
+
+| Name     | Role               | Contact                                                                                        |
+| -------  | ------------------ | ---------------------------------------------------------------------------------------------- |
+| Shreya   | Frontend Developer | [Email](mailto:shreyashridhar19@gmail.com) / [GitHub](https://github.com/shreyashridhara)      |
+| Pranjal  | Frontend Developer | [Email](mailto:pranjalshetty18@gmail.com) / [GitHub](https://github.com/PranjalShetty)         |
+| Anish    | Backend Developer  | [Email](mailto:anishprabhu783@gmail.com) / [GitHub](https://github.com/ashpb07)                |
+| Hithansh | Designer           | [Email](mailto:hithansharekere@gmail.com) / [GitHub](https://github.com/hithansharekere-debug) |
