@@ -16,10 +16,20 @@ Including another URLconf
 """
 from django.contrib import admin
 from django.urls import path,include
+from django.views.generic import TemplateView
 
 urlpatterns = [
     path('admin/', admin.site.urls),
+     path('', TemplateView.as_view(template_name='indexx.html'), name='home'),
+   
+
     path('member/',include('membership.urls')),
     path('api/',include('chat_api.urls')),
+    path('elderly/', include('elderly_checkin.urls')),
+     path('breathing/', include('breathing.urls')),
+     path('medication/', include('breathing.urls')),
+     path('docloc/', include('breathing.urls')),
+
+
 
 ]

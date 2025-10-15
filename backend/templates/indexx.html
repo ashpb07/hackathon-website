@@ -1,0 +1,258 @@
+{% load static %}
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>HealthSync - Your Health Companion</title>
+   <link rel="stylesheet" href="{% static 'css/indexx.css' %}">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+</head>
+<body class="light-mode">
+    <!-- Header -->
+    <header>
+        <div class="container">
+            <div class="header-content">
+                <div class="logo">
+                    <i class="fas fa-heartbeat"></i>
+                    <h1>HealthSync</h1>
+                </div>
+                
+                <nav>
+                
+                 
+                
+                    <ul>
+                        <li><a href="{% url "home" %}" class="nav-link" data-section="home">Home</a></li>
+                        <li><a href="#" class="nav-link" data-section="login">Login</a></li>
+                        <li><a href="#" class="nav-link" data-section="checkin">Elderly Check-in</a></li>
+                    </ul>
+               
+                </nav>
+                <div class="header-controls">
+                    <div class="theme-toggle">
+                        <input type="checkbox" id="themeToggle" class="toggle-checkbox">
+                        <label for="themeToggle" class="toggle-label">
+                            <i class="fas fa-sun"></i>
+                            <i class="fas fa-moon"></i>
+                            <div class="toggle-ball"></div>
+                        </label>
+                    </div>
+                <div class="auth-buttons">
+                {% if user.is_authenticated %}
+                 <h1 class="auth-buttons" style="font-size: 30px;">Hello, {{ user.first_name }}</h1>
+                    {% else %}
+                        <button class="btn btn-login" id="loginBtn">Login</button>
+                        <button class="btn btn-signup" id="signupBtn">Sign Up</button>
+                     {% endif %}
+                    </div>
+                </div>
+            </div>
+        </div>
+    </header>
+
+    <!-- Main Content -->
+    <main>
+        <!-- Home Section -->
+        <section id="home" class="active-section">
+            <!-- Hero Section -->
+            <div class="hero">
+                <div class="container">
+                    <h2>Your Health, Our Priority</h2>
+                    <p>HealthSync connects you with healthcare professionals, provides elderly monitoring, and offers 24/7 health assistance through our AI chatbot.</p>
+                    <div class="hero-buttons">
+                        <button class="btn btn-hero" id="heroLoginBtn">Get Started</button>
+                        <button class="btn btn-hero" id="heroCheckinBtn">Elderly Check-in</button>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Features Section -->
+            <div class="features">
+                <div class="container">
+                    <h2 class="section-title">Our Services</h2>
+                    <div class="features-grid">
+                        <div class="feature-card fade-in" style="animation-delay: 0.1s">
+                            <div class="feature-icon">
+                                <i class="fas fa-user-md"></i>
+                            </div>
+                            <h3>Professional Care</h3>
+                            <p>Connect with certified healthcare professionals for consultations and medical advice.</p>
+                        </div>
+                        <div class="feature-card fade-in" style="animation-delay: 0.3s">
+                            <div class="feature-icon">
+                                <i class="fas fa-user-check"></i>
+                            </div>
+                            <h3>Elderly Monitoring</h3>
+                            <p>Keep track of your elderly loved ones with our easy check-in system and health monitoring.</p>
+                        </div>
+                        <div class="feature-card fade-in" style="animation-delay: 0.5s">
+                            <div class="feature-icon">
+                                <i class="fas fa-robot"></i>
+                            </div>
+                            <h3>Health Assistant</h3>
+                            <p>Our AI-powered chatbot is available 24/7 to answer your health-related questions.</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Login/Signup Section -->
+       <section id="login" class="hidden">
+    <div class="container">
+        <div class="form-container fade-in">
+            <h2 class="form-title" id="formTitle">Login to HealthSync</h2>
+            
+            <!-- Single form that handles both actions -->
+            
+            <form id="authForm" method="POST">
+                {% csrf_token %}
+                <div class="form-group" id="nameGroup" style="display: none;">
+                    <label for="name">Full Name</label>
+                    <input type="text" id="name" name="fname" class="form-control" placeholder="Enter your full name">
+                </div>
+                <div class="form-group">
+                    <label for="email">Email Address</label>
+                    <input type="email" id="email" name="username" class="form-control" placeholder="Enter your email" required>
+                </div>
+                <div class="form-group">
+                    <label for="password">Password</label>
+                    <input type="password" id="password" name="pass1" class="form-control" placeholder="Enter your password" required>
+                </div>
+                <div class="form-group" id="confirmPasswordGroup" style="display: none;">
+                    <label for="confirmPassword">Confirm Password</label>
+                    <input type="password" id="confirmPassword" name="pass2" class="form-control" placeholder="Confirm your password">
+                </div>
+                <!-- Hidden fields -->
+                <input type="hidden" name="email" id="hiddenEmail">
+                <input type="hidden" name="lname" value="">
+                <input type="hidden" name="form_type" id="formType" value="login">
+                
+                <button type="submit" class="btn btn-signup" style="width: 100%;" id="submitBtn">Login</button>
+                <div class="form-footer">
+                    <p id="formFooterText">Don't have an account? <a href="#" id="toggleForm">Sign Up</a></p>
+                </div>
+            </form>
+        </div>
+    </div>
+</section>
+
+        <!-- Elderly Check-in Section -->
+        <section id="checkin" class="hidden">
+            <div class="container">
+                <div class="checkin-container fade-in">
+                    <h2 class="checkin-title">Elderly Health Check-in</h2>
+                    <form id="checkinForm">
+                        <div class="checkin-grid">
+                            <div class="form-group">
+                                <label for="patientName">Patient Name</label>
+                                <input type="text" id="patientName" class="form-control" placeholder="Full name">
+                            </div>
+                            <div class="form-group">
+                                <label for="patientAge">Age</label>
+                                <input type="number" id="patientAge" class="form-control" placeholder="Age">
+                            </div>
+                            <div class="form-group full-width">
+                                <label for="symptoms">Current Symptoms</label>
+                                <textarea id="symptoms" class="form-control" rows="3" placeholder="Describe any symptoms..."></textarea>
+                            </div>
+                            <div class="form-group">
+                                <label for="temperature">Temperature (°C)</label>
+                                <input type="number" id="temperature" class="form-control" placeholder="36.5" step="0.1">
+                            </div>
+                            <div class="form-group">
+                                <label for="bloodPressure">Blood Pressure</label>
+                                <input type="text" id="bloodPressure" class="form-control" placeholder="120/80">
+                            </div>
+                            <div class="form-group full-width">
+                                <label for="medications">Current Medications</label>
+                                <textarea id="medications" class="form-control" rows="2" placeholder="List current medications..."></textarea>
+                            </div>
+                            <div class="form-group full-width">
+                                <label for="notes">Additional Notes</label>
+                                <textarea id="notes" class="form-control" rows="3" placeholder="Any additional information..."></textarea>
+                            </div>
+                        </div>
+                        <button type="submit" class="btn btn-signup" style="width: 100%; margin-top: 20px;">Submit Check-in</button>
+                    </form>
+                </div>
+            </div>
+        </section>
+    </main>
+
+    <!-- Chatbot -->
+    <div class="chatbot-container">
+        <div class="chatbot-toggle" id="chatbotToggle">
+            <i class="fas fa-robot"></i>
+        </div>
+        <div class="chatbot-window" id="chatbotWindow">
+            <div class="chatbot-header">
+                <h3><i class="fas fa-robot"></i> HealthSync Assistant</h3>
+                <button class="chatbot-close" id="chatbotClose">
+                    <i class="fas fa-times"></i>
+                </button>
+            </div>
+            <div class="chatbot-messages" id="chatbotMessages">
+                <div class="message bot-message">
+                    Hello! I'm your HealthSync assistant. How can I help you today?
+                </div>
+            </div>
+            <div class="chatbot-input">
+                <input type="text" id="chatbotInput" placeholder="Type your message...">
+                <button id="chatbotSend"><i class="fas fa-paper-plane"></i></button>
+            </div>
+        </div>
+    </div>
+
+    <!-- Footer -->
+    <footer>
+        <div class="container">
+            <div class="footer-content">
+                <div class="footer-column">
+                    <h3>HealthSync</h3>
+                    <p>Your trusted partner in healthcare management and elderly monitoring.</p>
+                    <div class="social-links">
+                        <a href="#"><i class="fab fa-facebook-f"></i></a>
+                        <a href="#"><i class="fab fa-twitter"></i></a>
+                        <a href="#"><i class="fab fa-instagram"></i></a>
+                        <a href="#"><i class="fab fa-linkedin-in"></i></a>
+                    </div>
+                </div>
+                <div class="footer-column">
+                    <h3>Quick Links</h3>
+                    <ul>
+                        <li><a href="#">Home</a></li>
+                        <li><a href="#">About Us</a></li>
+                        <li><a href="#">Services</a></li>
+                        <li><a href="#">Contact</a></li>
+                    </ul>
+                </div>
+                <div class="footer-column">
+                    <h3>Services</h3>
+                    <ul>
+                        <li><a href="#">Doctor Consultations</a></li>
+                        <li><a href="#">Elderly Monitoring</a></li>
+                        <li><a href="#">Health Chatbot</a></li>
+                        <li><a href="#">Medication Reminders</a></li>
+                    </ul>
+                </div>
+                <div class="footer-column">
+                    <h3>Contact Us</h3>
+                    <ul>
+                        <li><i class="fas fa-map-marker-alt"></i> 123 Health St, Medical City</li>
+                        <li><i class="fas fa-phone"></i> +1 (555) 123-4567</li>
+                        <li><i class="fas fa-envelope"></i> info@healthsync.com</li>
+                    </ul>
+                </div>
+            </div>
+            <div class="copyright">
+                <p>&copy; 2023 HealthSync. All rights reserved.</p>
+            </div>
+        </div>
+    </footer>
+
+    <script src="{% static 'js/something.js' %}"></script>
+</body>
+</html>
