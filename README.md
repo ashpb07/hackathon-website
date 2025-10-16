@@ -1,4 +1,4 @@
-# 🧠 Hackathon Website
+# 🧠 Healthsync
 
 A fullstack web application built using **Django**, **Django REST Framework**, and **PostgreSQL**, designed for hackathon-style rapid prototyping and scalable development.  
 It combines a RESTful backend API with a dynamic HTML/CSS/JS frontend.
