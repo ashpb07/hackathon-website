@@ -25,9 +25,7 @@ This project is a hackathon boilerplate demonstrating a modular fullstack archit
 - **Django Channels + Redis** power real-time features such as chat and live status updates.
 - **Frontend (HTML/CSS/JS)** consumes the API and WebSocket connections to deliver an interactive interface.
 
-## Architecture Overview
 
-![Architecture Diagram](./assets/arc.png)
 
 ### Request/Response Flow (HTTP)
 
@@ -159,6 +157,3 @@ Open `frontend/index.html` in a browser, or serve it with any static file server
 | Anish | Backend Developer | [Email](mailto:anishprabhu783@gmail.com) · [GitHub](https://github.com/ashpb07) |
 | Hithansh | Designer | [Email](mailto:hithansharekere@gmail.com) · [GitHub](https://github.com/hithansharekere-debug) |
 
-## License
-
-MIT
