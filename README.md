@@ -1,124 +1,125 @@
-# 🧠 Healthsync
+# Healthsync
 
-A fullstack web application built using **Django**, **Django REST Framework**, and **PostgreSQL**, designed for hackathon-style rapid prototyping and scalable development.  
-It combines a RESTful backend API with a dynamic HTML/CSS/JS frontend.
+A fullstack web application built with Django, Django REST Framework, and PostgreSQL, designed for hackathon-style rapid prototyping with a path to scalable production use. It combines a RESTful backend API, real-time WebSocket features, and a dynamic HTML/CSS/JS frontend.
 
----
-
-## 📖 Table of Contents
+## Table of Contents
 
 - [About](#about)
 - [Architecture Overview](#architecture-overview)
 - [Tech Stack](#tech-stack)
 - [Features](#features)
 - [Project Structure](#project-structure)
-- [Contact](#contact)
 - [Getting Started](#getting-started)
   - [Prerequisites](#prerequisites)
   - [Installation](#installation)
   - [Running Locally](#running-locally)
-- [Contributing](#contributing)
+- [Contributors](#contributors)
 - [License](#license)
-- [Contact](#contact)
 
----
+## About
 
-## 🧾 About
+This project is a hackathon boilerplate demonstrating a modular fullstack architecture:
 
-This project serves as a **hackathon boilerplate** demonstrating a modular fullstack architecture:
+- **Django** handles backend logic, the ORM, and authentication.
+- **Django REST Framework (DRF)** exposes API endpoints for data exchange.
+- **Django Channels + Redis** power real-time features such as chat and live status updates.
+- **Frontend (HTML/CSS/JS)** consumes the API and WebSocket connections to deliver an interactive interface.
 
-- **Django** handles the backend logic, ORM, and authentication.
-- **Django REST Framework (DRF)** provides API endpoints for data exchange.
-- **Frontend (HTML/CSS/JS)** interacts with the API to deliver an interactive user interface.
-
----
-
-## 🏗️ Architecture Overview
-
-Below is the high-level architecture of this project:
+## Architecture Overview
 
 ![Architecture Diagram](./assets/arc.png)
 
-**Flow Summary:**
+### Request/Response Flow (HTTP)
+
+```mermaid
+flowchart LR
+    A[Client Browser] -->|HTTP request| B[Django]
+    B --> C[DRF API Layer]
+    C --> D[(PostgreSQL)]
+    D --> C
+    C -->|JSON response| A
+```
+
+### Real-Time Flow (WebSocket)
+
+```mermaid
+flowchart LR
+    A[Client Browser] -->|WebSocket| B[Daphne ASGI Server]
+    B --> C[Django Channels]
+    C --> D[(Redis Channel Layer)]
+    D --> E[Consumer 1]
+    D --> F[Consumer 2]
+    D --> G[Consumer N]
+    E -->|Broadcast| A
+```
+
+**Flow summary:**
 
 1. **Client (Browser)** — HTML, CSS, and JavaScript handle structure, styling, and interactivity.
-2. **Web Server** — Django processes requests, renders templates, and communicates with DRF internally.
-3. **API Layer** — Django REST Framework exposes endpoints returning JSON responses.
-4. **Database** — PostgreSQL stores and retrieves persistent data.
-5. **Data Flow** — Client ⇄ Django ⇄ DRF ⇄ PostgreSQL.
+2. **Web Server** — Django processes HTTP requests and routes them internally.
+3. **API Layer** — DRF exposes RESTful endpoints and serializes data to/from JSON.
+4. **Real-Time Layer** — Django Channels, running on Daphne (ASGI), uses Redis as a channel layer to broadcast events across multiple WebSocket consumers.
+5. **Database** — PostgreSQL stores and retrieves persistent application data.
 
----
-
-## 🧩 Tech Stack
+## Tech Stack
 
 | Layer | Technology | Description |
-|-------|-------------|-------------|
-| **Frontend (Client)** | **HTML5**, **CSS3**, **JavaScript (Vanilla JS)** | Handles UI structure, styling, and interactivity. Communicates with backend via HTTP/HTTPS requests. |
-| **Backend (Web Server)** | **Django (Python Web Framework)** | Manages server-side logic, routing, and serves templates or APIs. |
-| **API Layer** | **Django REST Framework (DRF)** | Exposes RESTful API endpoints for frontend communication. Serializes data between Django models and JSON. |
-| **Database** | **PostgreSQL** | Stores and retrieves persistent application data. |
-| **Communication** | **HTTP / HTTPS**, **JSON** | Enables client–server communication. |
-| **Runtime / Language** | **Python 3.x**, **JavaScript (ES6)** | Primary languages for backend and frontend. |
+|-------|-----------|-------------|
+| Frontend | HTML5, CSS3, JavaScript (Vanilla) | UI structure, styling, and interactivity. Communicates with the backend over HTTP and WebSocket. |
+| Backend | Django | Server-side logic, routing, and templates. |
+| API Layer | Django REST Framework | RESTful endpoints; serializes data between Django models and JSON. |
+| Real-Time | Django Channels, Daphne, Redis | WebSocket support for chat and live updates. |
+| Database | PostgreSQL | Persistent application data. |
+| Communication | HTTP/HTTPS, WebSocket, JSON | Client-server communication. |
+| Language/Runtime | Python 3.x, JavaScript (ES6) | Primary backend and frontend languages. |
 
+## Features
 
-Chatting system |
-Client → Daphne (ASGI) → Django Channels → Redis → Multiple Consumers
+- **Elderly Health Monitoring** — daily check-ins and a vitals tracking dashboard.
+- **AI Health Assistant** — chatbot support for medical queries.
+- **Secure Patient Portal** — login system with personal health records.
+- **Real-Time Updates** — live patient status and alerts for caregivers.
+- **Shared Experiences** — space to learn from others facing similar challenges.
+- **Group Channels** — multiple themed discussion rooms.
+- **Modular Design** — Django, DRF, and PostgreSQL for scalability.
+- **Analytics Ready** — extendable for data visualization and predictive insights.
 
-
----
-
-## ✨ Features
-
-- **Elderly Health Monitoring** — Daily check-ins and vital tracking dashboard.  
-- **AI Health Assistant** — 24/7 intelligent chatbot support for medical queries.  
--  **Secure Patient Portal** — Simple login system with personal health records.  
--  **Real-Time Updates** — Patient status and alerts for caregivers.  
--  **Modular Design** — Django + DRF + PostgreSQL for scalability.  
--  **Analytics Ready** — Extendable for data visualization and predictive insights.
-- **Shared Experiences** - Learn from others facing similar challenges
--**Group Channels**: Multiple themed discussion rooms
-
-
----
-
-## 🗂️ Project Structure
+## Project Structure
 
 ```text
 hackathon-website/
-├── backend/                                # Main Django Backend Root
-│   ├── backend/                            # Project Settings Directory
-│   │   ├── settings.py                     # Main configuration (DB, INSTALLED_APPS, CHANNELS)
-│   │   ├── urls.py                         # Root URL router (HTTP)
-│   │   ├── routing.py                      # Root ROUTING router (WebSocket/ASGI)
-│   │   └── wsgi.py / asgi.py               # Server interface files
-│   ├── api/                                # Example Django API Application
-│   │   ├── models.py                       # Database schemas
-│   │   ├── views.py                        # HTTP endpoint logic (DRF Views)
-│   │   ├── serializers.py                  # DRF data serialization
-│   │   ├── urls.py                         # App-specific HTTP URLs
-│   │   └── consumers.py                    # WebSocket handling logic
-│   ├── manage.py                           # Django command-line utility
-│   └── requirements.txt                    # Python dependencies (Django, DRF, Channels, Redis)
-├── frontend/                               # Static Frontend Files
-│   ├── index.html                          # Main application structure
-│   ├── style.css                           # Styling and presentation
-│   └── script.js                           # Client-side logic and API/WebSocket calls
-├── assets/                                 # Static assets (images, fonts, etc.)
-├── architecture.png                        # System architecture diagram
+├── backend/
+│   ├── backend/
+│   │   ├── settings.py       # Configuration (DB, INSTALLED_APPS, CHANNELS)
+│   │   ├── urls.py           # Root URL router (HTTP)
+│   │   ├── routing.py        # Root routing (WebSocket/ASGI)
+│   │   └── wsgi.py / asgi.py # Server interface files
+│   ├── api/
+│   │   ├── models.py         # Database schemas
+│   │   ├── views.py          # HTTP endpoint logic (DRF views)
+│   │   ├── serializers.py    # DRF data serialization
+│   │   ├── urls.py           # App-specific HTTP URLs
+│   │   └── consumers.py      # WebSocket handling logic
+│   ├── manage.py
+│   └── requirements.txt      # Django, DRF, Channels, Redis, etc.
+├── frontend/
+│   ├── index.html
+│   ├── style.css
+│   └── script.js
+├── assets/                   # Images, diagrams, fonts
 ├── .gitignore
 └── README.md
+```
 
-
-
----
-
-## ⚙️ Getting Started
+## Getting Started
 
 ### Prerequisites
+
 - Python 3.8+
 - pip
 - PostgreSQL
-- Node.js (optional for frontend tools)
+- Redis (for Channels)
+- Node.js (optional, for frontend tooling)
 - Git
 
 ### Installation
@@ -127,33 +128,37 @@ hackathon-website/
 git clone https://github.com/ashpb07/hackathon-website.git
 cd hackathon-website
 
-
 cd backend
 python -m venv venv
 source venv/bin/activate        # macOS/Linux
 # venv\Scripts\activate         # Windows
+
 pip install -r requirements.txt
 python manage.py migrate
+```
 
+### Running Locally
 
-cd ../frontend
-# Modify index.html, style.css, or script.js as needed
+```bash
+# Start Redis (required for Channels/WebSocket features)
+redis-server
 
-
+# Start the Django backend
 cd backend
 python manage.py runserver
+```
 
+Open `frontend/index.html` in a browser, or serve it with any static file server. Edit `index.html`, `style.css`, or `script.js` as needed.
 
+## Contributors
 
+| Name | Role | Contact |
+|------|------|---------|
+| Shreya | Frontend Developer | [Email](mailto:shreyashridhar19@gmail.com) · [GitHub](https://github.com/shreyashridhara) |
+| Pranjal | Frontend Developer | [Email](mailto:pranjalshetty18@gmail.com) · [GitHub](https://github.com/PranjalShetty) |
+| Anish | Backend Developer | [Email](mailto:anishprabhu783@gmail.com) · [GitHub](https://github.com/ashpb07) |
+| Hithansh | Designer | [Email](mailto:hithansharekere@gmail.com) · [GitHub](https://github.com/hithansharekere-debug) |
 
+## License
 
-
-
-## 👥 Contributors / Team
-
-| Name     | Role               | Contact                                                                                        |
-| -------- | ----------------- | ----------------------------------------------------------------------------------------------- |
-| Shreya   | Frontend Developer | [Email](mailto:shreyashridhar19@gmail.com) / [GitHub](https://github.com/shreyashridhara)      |
-| Pranjal  | Frontend Developer | [Email](mailto:pranjalshetty18@gmail.com) / [GitHub](https://github.com/PranjalShetty)         |
-| Anish    | Backend Developer  | [Email](mailto:anishprabhu783@gmail.com) / [GitHub](https://github.com/ashpb07)                |
-| Hithansh | Designer           | [Email](mailto:hithansharekere@gmail.com) / [GitHub](https://github.com/hithansharekere-debug) |
+MIT
